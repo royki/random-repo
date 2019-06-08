@@ -12,3 +12,5 @@ target/
 .bloop/
 .metals/
 .scalafmt.conf
+.ensime
+*.ensime_cache

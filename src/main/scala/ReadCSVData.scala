@@ -1,20 +1,17 @@
 import scala.io.{ Source, Codec }
 
-object ReadCSVData extends App {
+object ReadCSVData {
 
-  def toDoubleOrNeg(s: String): Double = {
-    try {
-      s.toDouble
-    }
-    catch {
-      case _: NumberFormatException => -1
-    }
+  def readData(file: String): List[String] = {
+    val source =
+      scala.io.Source.fromFile(file)(Codec("utf-8"))
+    val lines = source.getLines().filter(_.nonEmpty).toList
+    source.close
+    lines
   }
 
-  val source =
-    scala.io.Source.fromFile("src/main/resources/airports.csv")(Codec("utf-8"))
-  val lines = source.getLines().filter(_.nonEmpty).map(_.split(",")(0)).toSet
-  source.close
-  println(lines)
+  val airports = readData("src/main/resources/airports.csv")
+  val countries = readData("src/main/resources/countries.csv")
+  val runways = readData("src/main/resources/runways.csv")
 
 }
