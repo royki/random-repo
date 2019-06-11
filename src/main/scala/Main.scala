@@ -26,16 +26,25 @@ object askUser {
   val options = Tuple2("Query", "Report")
   val (a, b) = options
   val userInput = StdIn.readLine()
+
+  def getListOfAirport(country: String): String = {
+    val airportByCountry = airportInfo.groupBy(_.iso_country.trim).get(country)
+    val airportName = airportByCountry.get
+    airportName.map(c => c.name).mkString(",")
+  }
+
   if (userInput == "a") {
     println("Enter Country Code; Like: `US` or `AF` ")
     val country = StdIn.readLine()
-    val airportByCountry = airportInfo.groupBy(_.iso_country.trim).get(country)
+    val airportByCountry =
+      airportInfo.groupBy(_.iso_country.trim).get(country)
     val airportName = airportByCountry
     val totalAirportIntheCountry = airportByCountry.get.length
-    println(airportName)
+    // println(airportName)
+    val airport = getListOfAirport(country)
+    println(airport)
     println(s"Total number of Airport in $country is $totalAirportIntheCountry")
-  }
-  else {
+  } else {
     println("Report is coming soon ..... :-)")
   }
 }
