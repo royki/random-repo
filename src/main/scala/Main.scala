@@ -27,22 +27,20 @@ object askUser {
   val (a, b) = options
   val userInput = StdIn.readLine()
 
-  def getListOfAirport(country: String): String = {
+  def getListOfAirport(country: String): List[AirportData] = {
     val airportByCountry = airportInfo.groupBy(_.iso_country.trim).get(country)
     val airportName = airportByCountry.get
-    airportName.map(c => c.name).mkString(",")
+    airportName
   }
 
   if (userInput == "a") {
     println("Enter Country Code; Like: `US` or `AF` ")
     val country = StdIn.readLine()
-    val airportByCountry =
-      airportInfo.groupBy(_.iso_country.trim).get(country)
-    val airportName = airportByCountry
-    val totalAirportIntheCountry = airportByCountry.get.length
-    // println(airportName)
-    val airport = getListOfAirport(country)
-    println(airport)
+    val airports = getListOfAirport(country)
+    val airportInCountry =
+      airports.map(c => c.name)
+    val totalAirportIntheCountry = airports.length
+    println(airportInCountry)
     println(s"Total number of Airport in $country is $totalAirportIntheCountry")
   } else {
     println("Report is coming soon ..... :-)")
