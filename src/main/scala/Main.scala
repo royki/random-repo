@@ -3,11 +3,17 @@ import ReadCSVData._
 import AirportData._
 import CountryData._
 import RunwayData._
+import MapData._
+import scala.collection.breakOut
 
 object Main extends App {
 
   println("Choose Options a or b")
-  askUser
+  // println(countryByCode.keySet.toList.sorted)
+  println(convertCountryToCode("India"))
+  // println(getCountryName("AD"))
+  // askUser
+  // println(getCountryName("US"))
   // for (a <- airportInfo) {
   //   println(s"Airport List: $a")
   // }
@@ -27,22 +33,20 @@ object askUser {
   val (a, b) = options
   val userInput = StdIn.readLine()
 
-  def getListOfAirport(country: String): List[AirportData] = {
-    val airportByCountry = airportInfo.groupBy(_.iso_country.trim).get(country)
-    val airportName = airportByCountry.get
-    airportName
-  }
-
   if (userInput == "a") {
     println("Enter Country Code; Like: `US` or `AF` ")
     val country = StdIn.readLine()
     val airports = getListOfAirport(country)
-    val airportInCountry =
-      airports.map(c => c.name)
+    val countryName = getCountryName(country)
+    val listOfAirportInCountry =
+      airports.map(c => c.name.trim()).mkString("|")
     val totalAirportIntheCountry = airports.length
-    println(airportInCountry)
-    println(s"Total number of Airport in $country is $totalAirportIntheCountry")
-  } else {
+    println(
+      s"Total number of Airport in $countryName is $totalAirportIntheCountry"
+    )
+    println(s"List of airports in $countryName \n $listOfAirportInCountry")
+  }
+  else {
     println("Report is coming soon ..... :-)")
   }
 }

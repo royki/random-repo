@@ -28,23 +28,21 @@ object AirportData {
       airport(9).toString
     )
   }.toList
-  // .take(25)
+  // .take(100)
   // .groupBy(_.iso_country)
 
 }
 
 object CountryData {
 
-  val countryInfo = countries
-    .map { c =>
-      val country = c.split(",")
-      CountryData(
-        /*country(0).toInt,*/ country(1).toString,
-                              country(2).toString
-      )
-    }
-    .toList
-    .take(10)
+  val countryInfo = countries.map { c =>
+    val country = c.split(",")
+    CountryData(
+      /*country(0).toInt,*/ country(1).toString,
+                            country(2).toString
+    )
+  }.toList
+  // .take(100)
 }
 
 object RunwayData {
