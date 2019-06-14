@@ -1,4 +1,3 @@
-import scala.io._
 import ReadCSVData._
 
 // Airport CSV Data
@@ -19,7 +18,7 @@ case class RunwayData( /*id: Int,*/ airport_ident: String)
 object AirportData {
 
   val airportInfo = airports.map { a =>
-    val airport = a.split(",")
+    val airport = a.split(",").map(_.trim())
     AirportData(
       airport(1).toString,
       airport(2).toString,
@@ -36,7 +35,7 @@ object AirportData {
 object CountryData {
 
   val countryInfo = countries.map { c =>
-    val country = c.split(",")
+    val country = c.split(",").map(_.trim())
     CountryData(
       /*country(0).toInt,*/ country(1).toString,
                             country(2).toString
@@ -51,7 +50,7 @@ object RunwayData {
 
   val runwayInfo = runways
     .map { r =>
-      val runway = r.split(",")
+      val runway = r.split(",").map(_.trim())
       RunwayData( /*runway(0).toInt,*/ runway(2).toString)
     }
     .toList

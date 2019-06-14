@@ -4,27 +4,19 @@ import AirportData._
 import CountryData._
 import RunwayData._
 import MapData._
+import ProcessedData._
 
 object Main extends App {
 
   println("Choose Options a or b")
-  // println(countryByCode.keySet.toList.sorted)
-  println(convertCountryToCode("Mexico"))
-  // println(getCountryName("AD"))
-  askUser
-  // println(getCountryName("US"))
-  // for (a <- airportInfo) {
-  //   println(s"Airport List: $a")
-  // }
+  println(getCodeOfCountry("Mexico"))
+  println(getCountryName("MX"))
 
-  // for (c <- countryInfo) {
-  //   println(s"Country List: $c")
-  // }
+  // println(code)
+  // println()
+  // println(country)
 
-  // for (r <- runwayInfo) {
-  //   println(s"Runway List: $r")
-  // }
-
+  // askUser
 }
 
 object askUser {
@@ -36,18 +28,18 @@ object askUser {
     println("Enter Country Code; Like: `US` or `AF` ")
     println
     val country = StdIn.readLine()
-    val airports = getListOfAirport(country)
+    val airportListInCountry = getListOfAirport(country)
     val countryName = getCountryName(country)
     val listOfAirportInCountry =
-      airports.map(c => c.name.trim()).mkString("\n")
-    val totalAirportIntheCountry = airports.length
+      airportListInCountry.map(c => c.name.trim()).mkString("\n")
+
+    val totalAirportIntheCountry = airportListInCountry.length
     println(
       s"Total number of Airport in $countryName is $totalAirportIntheCountry"
     )
     println
     println(s"List of airports in $countryName \n\n $listOfAirportInCountry")
-  }
-  else {
+  } else {
     println("Report is coming soon ..... :-)")
   }
 }
