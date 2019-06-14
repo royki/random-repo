@@ -22,10 +22,10 @@ object MapData {
     val country = countryInfo.map(_.name)
     val code = countryInfo.map(_.code)
     val countryByCode = (country zip code).toMap
-    countryByCode
-      .get(s"${country + "                                        "}")
-      .mkString(" ")
-      .trim()
+    // countryByCode
+    //   .get(s"${country + "                                        "}")
+    //   .mkString(" ")
+    //   .trim()
     countryByCode
       .get("Mexico                                       ")
       .mkString(" ")
