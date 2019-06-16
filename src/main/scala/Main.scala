@@ -9,14 +9,8 @@ import ProcessedData._
 object Main extends App {
 
   println("Choose Options a or b")
-  println(getCodeOfCountry("Mexico"))
-  println(getCountryName("MX"))
+  askUser
 
-  // println(code)
-  // println()
-  // println(country)
-
-  // askUser
 }
 
 object askUser {
@@ -26,20 +20,24 @@ object askUser {
 
   if (userInput == "a") {
     println("Enter Country Code; Like: `US` or `AF` ")
-    println
-    val country = StdIn.readLine()
-    val airportListInCountry = getListOfAirport(country)
-    val countryName = getCountryName(country)
-    val listOfAirportInCountry =
-      airportListInCountry.map(c => c.name.trim()).mkString("\n")
 
-    val totalAirportIntheCountry = airportListInCountry.length
+    val countryCode = StdIn.readLine()
+
+    val listOfAirportInCountry = getAllAirportOfCountry(countryCode)
+
+    val countryName = getCountryName(countryCode)
+
+    val totalAirportIntheCountry = getListOfAirport(countryCode).length
+
     println(
       s"Total number of Airport in $countryName is $totalAirportIntheCountry"
     )
+
     println
+
     println(s"List of airports in $countryName \n\n $listOfAirportInCountry")
-  } else {
+  }
+  else {
     println("Report is coming soon ..... :-)")
   }
 }

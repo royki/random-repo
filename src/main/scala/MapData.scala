@@ -5,11 +5,16 @@ import RunwayData._
 
 object MapData {
 
-  // Get all the airport name using country-code from AirportData
+  // Get all the airport data using country-code from AirportData
   def getListOfAirport(countryCode: String): List[AirportData] = {
-    val airportByCode = airportInfo.groupBy(_.iso_country.trim).get(countryCode)
-    val airportName = airportByCode.get
-    airportName
+    val airportByCode = airportInfo.groupBy(_.iso_country.trim).getOrElse(countryCode, List.empty)
+    val airportName = airportByCode
+    airportName //.drop(0)
+  }
+
+  // Get all the airport name using country-code from AirportData
+  def getAllAirportOfCountry(countryCode: String): String = {
+    getListOfAirport(countryCode).map(c => c.name.trim()).mkString("\n")
   }
 
   // Map Country with Code and Get country name using country-code from CountryData
